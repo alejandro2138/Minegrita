@@ -1,39 +1,166 @@
-<!-- Música de fondo (YouTube embed) -->
-<div id="youtubePlayer">
-  <iframe id="ytIframe"
-    src=""
-    frameborder="0"
-    allow="autoplay"
-    allowfullscreen>
-  </iframe>
-</div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Para Mi Negrita 💖</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-<script>
-  const heartButton = document.getElementById('mainHeart');
-  const messageCard = document.getElementById('messageCard');
-  const ytIframe = document.getElementById('ytIframe');
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      font-family: 'Segoe UI', sans-serif;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
 
-  heartButton.addEventListener('click', () => {
-    heartButton.style.display = 'none';
-    messageCard.style.display = 'block';
+    .heart-button {
+      font-size: 100px;
+      color: #ff4d6d;
+      cursor: pointer;
+      animation: pulse 1.5s infinite;
+      transition: transform 0.5s ease;
+      z-index: 2;
+    }
 
-    // ▶️ Esclava Remix - Anuel AA
-    ytIframe.src = "https://www.youtube.com/embed/6CwG3bAPj30?autoplay=1&loop=1&playlist=6CwG3bAPj30";
-  });
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
 
-  // Corazones flotantes
-  function createFloatingHeart() {
-    const heart = document.createElement('div');
-    heart.className = 'heart-float';
-    heart.innerText = Math.random() > 0.5 ? '❤️' : '💞';
-    heart.style.left = Math.random() * window.innerWidth + 'px';
-    heart.style.top = window.innerHeight + 'px';
-    heart.style.fontSize = 20 + Math.random() * 20 + 'px';
-    document.body.appendChild(heart);
-    setTimeout(() => heart.remove(), 2000);
-  }
+    .card {
+      background-color: white;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      max-width: 400px;
+      display: none;
+      animation: fadeIn 1s ease forwards;
+      z-index: 3;
+    }
 
-  setInterval(createFloatingHeart, 500);
-</script>
+    h1 {
+      color: #e63946;
+      margin-bottom: 20px;
+      font-size: 2em;
+    }
 
+    p {
+      font-size: 1.2em;
+      color: #333;
+    }
 
+    .heart {
+      font-size: 50px;
+      color: #ff4d6d;
+      animation: pulse 1.5s infinite;
+      margin-top: 20px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Corazones flotantes */
+    .heart-float {
+      position: absolute;
+      color: #ff4d6d;
+      font-size: 30px;
+      pointer-events: none;
+      animation: floatUp 3s ease-in forwards;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-200px) scale(1.5); opacity: 0; }
+    }
+
+    audio {
+      display: none;
+    }
+
+    /* Efecto de partículas suaves */
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.4);
+      animation: rise 10s linear infinite;
+    }
+
+    @keyframes rise {
+      from { transform: translateY(0); opacity: 0.4; }
+      to { transform: translateY(-1000px); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Botón de corazón -->
+  <div class="heart-button" id="mainHeart">💖</div>
+
+  <!-- Tarjeta de mensaje -->
+  <div class="card" id="messageCard">
+    <h1>Te quiero Muchooooooo 💕</h1>
+    <p>
+      Me motivas a terminar la carrera y superarme... sé que no me crees, pero es así.<br />
+      Gracias por estar a mi lado, por ser tan especial<br />
+      y por darme ánimos cuando estoy mal. Esta es la primera de muchas sorpresas 💖
+    </p>
+    <div class="heart">❤️</div>
+  </div>
+
+  <!-- Música de fondo local -->
+  <audio id="musicPlayer" autoplay loop>
+    <source src="Mntp remix Pablo Chill-E ft. Ithan NY, Jere Klein, Chico trujillo, Portavoz.mp3" type="audio/mpeg" />
+    Tu navegador no soporta el audio HTML5.
+  </audio>
+
+  <script>
+    const heartButton = document.getElementById('mainHeart');
+    const messageCard = document.getElementById('messageCard');
+    const musicPlayer = document.getElementById('musicPlayer');
+
+    heartButton.addEventListener('click', () => {
+      heartButton.style.display = 'none';
+      messageCard.style.display = 'block';
+      musicPlayer.play(); // Inicia la canción
+    });
+
+    // Corazones flotantes
+    function createFloatingHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart-float';
+      heart.innerText = Math.random() > 0.5 ? '❤️' : '💞';
+      heart.style.left = Math.random() * window.innerWidth + 'px';
+      heart.style.top = window.innerHeight + 'px';
+      heart.style.fontSize = 20 + Math.random() * 20 + 'px';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 3000);
+    }
+
+    setInterval(createFloatingHeart, 500);
+
+    // Partículas suaves de fondo
+    for (let i = 0; i < 20; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.style.width = particle.style.height = Math.random() * 10 + 5 + 'px';
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.bottom = '-' + Math.random() * 200 + 'px';
+      particle.style.animationDuration = (8 + Math.random() * 5) + 's';
+      document.body.appendChild(particle);
+    }
+  </script>
+</body>
+</html>
