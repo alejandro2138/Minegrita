@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Para Mi Negrita 💖</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #ff9a9e, #fad0c4);
+      font-family: 'Segoe UI', sans-serif;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .heart-button {
+      font-size: 100px;
+      color: #ff5e78;
+      cursor: pointer;
+      animation: pulse 1.5s infinite;
+      transition: transform 0.5s ease;
+      z-index: 2;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+    .card {
+      background-color: white;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 0 30px rgba(255, 105, 135, 0.5);
+      text-align: center;
+      max-width: 400px;
+      display: none;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    h1 {
+      color: #ff5e78;
+      margin-bottom: 20px;
+      font-size: 2em;
+    }
+
+    p {
+      font-size: 1.2em;
+      color: #444;
+    }
+
+    .heart {
+      font-size: 50px;
+      color: #ff5e78;
+      animation: pulse 1.5s infinite;
+      margin-top: 20px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Corazones flotantes */
+    .heart-float {
+      position: absolute;
+      color: #ff5e78;
+      font-size: 30px;
+      pointer-events: none;
+      animation: floatUp 2s ease-in forwards;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-200px) scale(1.5); opacity: 0; }
+    }
+
+    /* Música oculta */
+    #music {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Botón de corazón -->
+  <div class="heart-button" id="mainHeart">💖</div>
+
+  <!-- Tarjeta de mensaje -->
+  <div class="card" id="messageCard">
+    <h1>Te quiero Muchooooooo 💕</h1>
+    <p>
+      Me motivas a terminar la carrera y superarme... sé que no me crees, pero es así.<br />
+      Gracias por estar a mi lado, por ser tan especial<br />
+      y por darme ánimos cuando estoy mal. Esta es la primera de muchas sorpresas 💖
+    </p>
+    <div class="heart">❤️</div>
+  </div>
+
+  <!-- Música de fondo (YouTube embed en autoplay) -->
+  <div id="music">
+    <iframe width="0" height="0" src="https://www.youtube.com/embed/wohwc9MQt6A?autoplay=1&loop=1&playlist=wohwc9MQt6A" 
+      title="YouTube video player" 
+      frameborder="0" 
+      allow="autoplay" 
+      allowfullscreen>
+    </iframe>
+  </div>
+
+  <script>
+    const heartButton = document.getElementById('mainHeart');
+    const messageCard = document.getElementById('messageCard');
+    const music = document.getElementById('music');
+
+    heartButton.addEventListener('click', () => {
+      heartButton.style.display = 'none';
+      messageCard.style.display = 'block';
+      music.style.display = 'block'; // muestra y activa la música
+    });
+
+    // Corazones flotantes
+    function createFloatingHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart-float';
+      heart.innerText = Math.random() > 0.5 ? '❤️' : '💞';
+      heart.style.left = Math.random() * window.innerWidth + 'px';
+      heart.style.top = window.innerHeight + 'px';
+      heart.style.fontSize = 20 + Math.random() * 20 + 'px';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 2000);
+    }
+
+    setInterval(createFloatingHeart, 500);
+  </script>
+</body>
+</html>
+
